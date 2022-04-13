@@ -1,0 +1,59 @@
+local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
+
+local GUI = Mercury:Create{
+    Name = "Dupe",
+    Size = UDim2.fromOffset(550, 350),
+    Theme = Mercury.Themes.Dark,
+    Link = "Created by ! Sayu Ogiwara.#0776"
+}
+
+local Tab = GUI:Tab{
+    Name = "Dupe Here",
+    Icon = "rbxassetid://8569322835"
+}
+
+local MyDropdown = Tab:Dropdown{
+    Name = "Dupe",
+    StartingText = "Select Fruit...",
+    Description = "Select fruit you wanna dupe",
+    Items = {"Light Fruit", "Quest Scroll", "Rubber Fruit", "String Fruit", "Venom Fruit", "Sand Fruit", "Quake Fruit",
+             "Chop Fruit", "Phoenix Fruit", "Lightning Fruit", "Invisible Fruit", "Ice Fruit", "Fire Fruit",
+             "Magma Fruit", "Barrier Fruit", "Operation Fruit", "Island Tracker"},
+    Callback = function(item)
+        _G.Fruits = item
+        return
+    end
+}
+
+Tab:Button{
+    Name = "Start Dupe",
+    Description = nil,
+    Callback = function()
+        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ClassName == "Tool" then
+                v.CanBeDropped = true
+            end
+        end
+        wait(1)
+        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.Name == _G.Fruits then
+                v.Parent = game.Players.LocalPlayer.Character
+            end
+        end
+        wait(0.1)
+        for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v:IsA("Tool") then
+                v.Parent = game.Workspace
+            end
+        end
+        game.Players.LocalPlayer.Character.Humanoid:Destroy()
+    end
+}
+
+GUI:Notification{
+    Title = "How To Use",
+    Text = "PUT YOUR RIGHT ARM INSIDE YOUR ALT BODY/TORSO (Thats what she said)",
+    Duration = 69420,
+    Callback = function()
+    end
+}
